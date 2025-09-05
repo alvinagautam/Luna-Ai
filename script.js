@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () =>
     const loader = document.getElementById('loader');
     const historyGrid = document.getElementById('history-grid');
 
-    const API_KEY = "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";
+    const API_KEY = "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";
     const API_URL = "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-xl-base-1.0";
 
     let imageHistory = [];
@@ -147,3 +147,4 @@ document.addEventListener('DOMContentLoaded', () =>
         }
     });
 });
+
