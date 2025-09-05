@@ -1,6 +1,7 @@
 //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
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => 
+{
     // ---- DOM Element Selectors ----
     const themeToggle = document.getElementById('theme-toggle');
     const historyToggle = document.getElementById('history-toggle');
@@ -28,7 +29,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.setAttribute('data-theme', currentTheme);
     themeToggle.querySelector('.material-symbols-outlined').textContent = currentTheme === 'light' ? 'dark_mode' : 'light_mode';
 
-    themeToggle.addEventListener('click', () => {
+    themeToggle.addEventListener('click', () => 
+    {
         let newTheme = document.body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
         document.body.setAttribute('data-theme', newTheme);
         localStorage.setItem('theme', newTheme);
@@ -36,13 +38,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
     // ---- History Panel Management ----
-    historyToggle.addEventListener('click', () => {
+    historyToggle.addEventListener('click', () => 
+    {
         historySidebar.classList.toggle('show');
         appWrapper.classList.toggle('shifted');
     });
 
     // ---- UI Update Functions ----
-    const showLoading = (isLoading) => {
+    const showLoading = (isLoading) =>
+    {
         loader.style.display = isLoading ? 'block' : 'none';
         generateBtn.disabled = isLoading;
         if (isLoading) {
@@ -51,7 +55,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    const updateImageDisplay = (imageUrl, prompt) => {
+    const updateImageDisplay = (imageUrl, prompt) => 
+    {
         generatedImage.src = imageUrl;
         generatedImage.alt = prompt;
         generatedImage.style.display = 'block';
@@ -59,7 +64,8 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // ---- History Functions ----
-    const addToHistory = (imageUrl, prompt) => {
+    const addToHistory = (imageUrl, prompt) => 
+    {
         // Add to the beginning of the array
         imageHistory.unshift({ src: imageUrl, prompt });
         
@@ -71,7 +77,8 @@ document.addEventListener('DOMContentLoaded', () => {
         renderHistory();
     };
 
-    const renderHistory = () => {
+    const renderHistory = () => 
+    {
         historyGrid.innerHTML = ''; // Clear current history
         imageHistory.forEach(item => {
             const imgElement = document.createElement('img');
@@ -91,31 +98,38 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // ---- Core Image Generation Function ----
-    const generateImage = async () => {
+    const generateImage = async () => 
+    {
         const prompt = promptInput.value.trim();
-        if (!prompt) {
+        if (!prompt) 
+        {
             alert('Please enter a prompt!');
             return;
         }
 
-        if (!API_KEY.startsWith("hf_")) {
+        if (!API_KEY.startsWith("hf_")) 
+        {
             alert('Please enter a valid Hugging Face API Key in script.js');
             return;
         }
 
         showLoading(true);
         
-        try {
-            const response = await fetch(API_URL, {
+        try 
+        {
+            const response = await fetch(API_URL, 
+            {
                 method: 'POST',
-                headers: {
+                headers: 
+                {
                     'Authorization': `Bearer ${API_KEY}`,
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ inputs: prompt }),
             });
 
-            if (!response.ok) {
+            if (!response.ok) 
+            {
                 const errorBody = await response.text();
                 throw new Error(`API request failed: ${response.status} ${response.statusText} - ${errorBody}`);
             }
@@ -127,18 +141,24 @@ document.addEventListener('DOMContentLoaded', () => {
             updateImageDisplay(imageUrl, prompt);
             addToHistory(imageUrl, prompt);
 
-        } catch (error) {
+        }
+        catch (error) 
+        {
             console.error(error);
             placeholderText.textContent = `Sorry, something went wrong. Please try again. (${error.message})`;
             placeholderText.style.display = 'block';
-        } finally {
+        }
+        finally 
+        {
             showLoading(false);
         }
     };
 
     generateBtn.addEventListener('click', generateImage);
-    promptInput.addEventListener('keyup', (event) => {
-        if (event.key === 'Enter' && !event.shiftKey) {
+    promptInput.addEventListener('keyup', (event) => 
+    {
+        if (event.key === 'Enter' && !event.shiftKey) 
+        {
             generateImage();
         }
     });
