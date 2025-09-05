@@ -1,8 +1,5 @@
-//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
-
 document.addEventListener('DOMContentLoaded', () => 
 {
-    // ---- DOM Element Selectors ----
     const themeToggle = document.getElementById('theme-toggle');
     const historyToggle = document.getElementById('history-toggle');
     const historySidebar = document.getElementById('history-sidebar');
@@ -15,16 +12,11 @@ document.addEventListener('DOMContentLoaded', () =>
     const loader = document.getElementById('loader');
     const historyGrid = document.getElementById('history-grid');
 
-    // ---- API Configuration ----
-    // ⚠️ IMPORTANT: Replace with your actual Hugging Face API Key
-    const API_KEY = "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"; 
-    // This is a popular, fast model. You can find more on the Hugging Face Hub.
+    const API_KEY = "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";
     const API_URL = "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-xl-base-1.0";
 
-    // ---- State Management ----
     let imageHistory = [];
 
-    // ---- Theme Management ----
     const currentTheme = localStorage.getItem('theme') || 'dark';
     document.body.setAttribute('data-theme', currentTheme);
     themeToggle.querySelector('.material-symbols-outlined').textContent = currentTheme === 'light' ? 'dark_mode' : 'light_mode';
@@ -37,14 +29,12 @@ document.addEventListener('DOMContentLoaded', () =>
         themeToggle.querySelector('.material-symbols-outlined').textContent = newTheme === 'light' ? 'dark_mode' : 'light_mode';
     });
     
-    // ---- History Panel Management ----
     historyToggle.addEventListener('click', () => 
     {
         historySidebar.classList.toggle('show');
         appWrapper.classList.toggle('shifted');
     });
 
-    // ---- UI Update Functions ----
     const showLoading = (isLoading) =>
     {
         loader.style.display = isLoading ? 'block' : 'none';
@@ -63,13 +53,10 @@ document.addEventListener('DOMContentLoaded', () =>
         placeholderText.style.display = 'none';
     };
 
-    // ---- History Functions ----
     const addToHistory = (imageUrl, prompt) => 
     {
-        // Add to the beginning of the array
         imageHistory.unshift({ src: imageUrl, prompt });
         
-        // Optional: Keep history to a certain size, e.g., 20 items
         if (imageHistory.length > 20) {
             imageHistory.pop();
         }
@@ -79,15 +66,14 @@ document.addEventListener('DOMContentLoaded', () =>
 
     const renderHistory = () => 
     {
-        historyGrid.innerHTML = ''; // Clear current history
+        historyGrid.innerHTML = '';
         imageHistory.forEach(item => {
             const imgElement = document.createElement('img');
             imgElement.src = item.src;
             imgElement.alt = item.prompt;
-            imgElement.title = `Click to view\nPrompt: "${item.prompt}"`; // Tooltip
+            imgElement.title = `Click to view\nPrompt: "${item.prompt}"`;
             imgElement.addEventListener('click', () => {
                 updateImageDisplay(item.src, item.prompt);
-                // Optional: close sidebar on selection
                 if (window.innerWidth <= 768) {
                     historySidebar.classList.remove('show');
                     appWrapper.classList.remove('shifted');
@@ -97,7 +83,6 @@ document.addEventListener('DOMContentLoaded', () =>
         });
     };
 
-    // ---- Core Image Generation Function ----
     const generateImage = async () => 
     {
         const prompt = promptInput.value.trim();
@@ -134,7 +119,6 @@ document.addEventListener('DOMContentLoaded', () =>
                 throw new Error(`API request failed: ${response.status} ${response.statusText} - ${errorBody}`);
             }
 
-            // The API returns the image data directly as a Blob
             const blob = await response.blob();
             const imageUrl = URL.createObjectURL(blob);
             
@@ -163,5 +147,3 @@ document.addEventListener('DOMContentLoaded', () =>
         }
     });
 });
-
-
