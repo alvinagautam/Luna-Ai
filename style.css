@@ -1,0 +1,329 @@
+:root
+{
+    --font-main: 'Poppins', sans-serif;
+    --bg-color: #121212;
+    --primary-text: #e0e0e0;
+    --secondary-text: #a0a0a0;
+    --card-bg: #1e1e1e;
+    --accent-color: #8A2BE2;
+    --accent-hover: #9932CC;
+    --border-color: #333;
+    --shadow-color: rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="light"]
+{
+    --bg-color: #f4f4f9;
+    --primary-text: #2c2c2c;
+    --secondary-text: #555;
+    --card-bg: #ffffff;
+    --accent-color: #8A2BE2;
+    --accent-hover: #7b24c8;
+    --border-color: #ddd;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body
+{
+    font-family: var(--font-main);
+    background-color: var(--bg-color);
+    color: var(--primary-text);
+    transition: background-color 0.4s ease, color 0.4s ease;
+    overflow-x: hidden;
+}
+
+.main-container
+{
+    display: flex;
+    min-height: 100vh;
+}
+
+#history-sidebar
+{
+    width: 280px;
+    flex-shrink: 0;
+    background-color: var(--card-bg);
+    border-right: 1px solid var(--border-color);
+    padding: 20px;
+    transform: translateX(-100%);
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    z-index: 100;
+    overflow-y: auto;
+}
+
+#history-sidebar.show
+{
+    transform: translateX(0);
+}
+
+#history-sidebar h2
+{
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--accent-color);
+}
+
+#history-grid
+{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+#history-grid img
+{
+    width: 100%;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#history-grid img:hover
+{
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px var(--shadow-color);
+}
+
+#app-wrapper
+{
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 40px;
+    transition: margin-left 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    width: 100%;
+}
+
+#app-wrapper.shifted
+{
+    margin-left: 280px;
+}
+
+header
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.title-container
+{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.logo
+{
+    width: 50px;
+    height: 50px;
+    filter: drop-shadow(0 0 10px var(--accent-color));
+}
+
+header h1
+{
+    font-size: 2.5rem;
+    font-weight: 600;
+    background: linear-gradient(45deg, var(--accent-color), #da70d6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.icon-btn
+{
+    background: none;
+    border: none;
+    color: var(--secondary-text);
+    font-size: 24px;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.icon-btn:hover
+{
+    color: var(--primary-text);
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+main
+{
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+.image-section
+{
+    width: 100%;
+    max-width: 512px;
+}
+
+#image-container
+{
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background-color: var(--card-bg);
+    border-radius: 20px;
+    border: 2px dashed var(--border-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-shadow: 0 8px 30px var(--shadow-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#image-container:hover
+{
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px var(--shadow-color);
+}
+
+#placeholder-text
+{
+    color: var(--secondary-text);
+    text-align: center;
+}
+
+#generated-image
+{
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 10px;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+#generated-image:hover
+{
+    transform: scale(1.05);
+}
+
+.prompt-section
+{
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#prompt-input
+{
+    background-color: var(--card-bg);
+    color: var(--primary-text);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 15px;
+    font-family: var(--font-main);
+    font-size: 1rem;
+    resize: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#prompt-input:focus
+{
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 10px var(--accent-color);
+}
+
+#generate-btn
+{
+    background-color: var(--accent-color);
+    color: white;
+    font-family: var(--font-main);
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    padding: 15px 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#generate-btn:hover
+{
+    background-color: var(--accent-hover);
+    transform: scale(1.03);
+}
+
+#generate-btn:disabled
+{
+    background-color: #555;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.loader
+{
+    border: 5px solid var(--border-color);
+    border-top: 5px solid var(--accent-color);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin
+{
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@media (max-width: 768px)
+{
+    #app-wrapper
+    {
+        padding: 15px;
+        transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        margin-left: 0 !important;
+    }
+
+    #app-wrapper.shifted
+    {
+        transform: translateX(280px);
+    }
+    
+    .title-container
+    {
+        position: static;
+        transform: none;
+    }
+    header h1
+    {
+        font-size: 2rem;
+    }
+    .logo
+    {
+        width: 40px;
+        height: 40px;
+    }
+}

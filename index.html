@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luna AI</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+</head>
+
+<body data-theme="dark">
+    <div class="main-container">
+        <aside id="history-sidebar">
+            <h2>History</h2>
+            <div id="history-grid">
+                </div>
+        </aside>
+
+        <div id="app-wrapper">
+            <header>
+                <button id="history-toggle" class="icon-btn" title="Toggle History">
+                    <span class="material-symbols-outlined">history</span>
+                </button>
+                <div class="title-container">
+                    <svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.003c-2.735 0-5.29 .953-7.223 2.57-1.57 1.31-2.777 3.018-3.48 4.954.21-1.802.94-3.485 2.18-4.886C5.23 2.94 7.696 2 10.154 2c3.48 0 6.43 1.98 7.96 4.88.243.46.46.93.647 1.413-.24-.04-.48-.073-.726-.093C15.62 7.57 12 10.33 12 14.5c0 1.18.26 2.3.73 3.29-.42.04-.85.06-1.28.06-5.52 0-10-4.48-10-10S6.48 2.004 12 2.003z"/>
+                    </svg>
+                    <!--<img src="https://i.imgur.com/gJeB5eG.png" alt="Luna AI Logo" class="logo">-->
+                    <h1>Luna AI</h1>
+                </div>
+                <button id="theme-toggle" class="icon-btn" title="Toggle Theme">
+                    <span class="material-symbols-outlined">light_mode</span>
+                </button>
+            </header>
+
+            <main>
+                <section class="image-section">
+                    <div id="image-container">
+                        <p id="placeholder-text">Your generated image will appear here... 🎨</p>
+                        <img id="generated-image" src="" alt="Generated AI image" style="display: none;">
+                        <div class="loader" id="loader" style="display: none;"></div>
+                    </div>
+                </section>
+                
+                <section class="prompt-section">
+                    <textarea id="prompt-input" rows="3" placeholder="Describe the image you want to create... e.g., 'An astronaut riding a horse on the moon, photorealistic'"></textarea>
+                    <button id="generate-btn">
+                        <span class="material-symbols-outlined">auto_awesome</span>
+                        Generate
+                    </button>
+                </section>
+            </main>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
