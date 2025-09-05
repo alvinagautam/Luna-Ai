@@ -1,5 +1,4 @@
-//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
-//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
+//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
 
 document.addEventListener('DOMContentLoaded', () => 
 {
@@ -18,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () =>
 
     // ---- API Configuration ----
     // ⚠️ IMPORTANT: Replace with your actual Hugging Face API Key
-    const API_KEY = "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"; 
+    const API_KEY = "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"; 
     // This is a popular, fast model. You can find more on the Hugging Face Hub.
     const API_URL = "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-xl-base-1.0";
 
@@ -164,4 +163,5 @@ document.addEventListener('DOMContentLoaded', () =>
         }
     });
 });
+
 
